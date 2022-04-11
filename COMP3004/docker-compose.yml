@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  app1:
+    build: ./app1
+    ports:
+      - "8085:80"
+
+  app2:
+    build: ./app2
+    ports:
+      - "8086:80"
+
+  app3:
+    build: ./app3
+    ports:
+      - "8087:80"
+
+  nginx:
+    build: ./nginx
+    ports:
+      -"8088:80"
+    depends_on:
+      - app1
+      - app2
+      - app3
+
+  mySQL:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=AVeryGreatPassword1010
+    restart: always
